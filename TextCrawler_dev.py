@@ -33,17 +33,33 @@ for linha in arquivo:
 		except Exception as erro:
 			print('\n\nErro #00000001: ' + str(erro))
 		finally:
-			counter = 0
-			if palavra_index[0] == -1:
+			counter = -1
+			if palavra_index[counter] == -1:
 				pass
 			else:
 				#try:
-				arquivo_res = open('resultado.txt', 'a')
-				if palavras_fim[0] != '-1-':
-					arquivo_res.write(palavra[palavra_index[counter] + len(palavras[counter]): palavra_fim_index] + '	')
-				else:
-					arquivo_res.write(palavra[palavra_index[counter] + len(palavras[counter]): -1] + '	')
-		
+				for palavra in linha.split():
+					arquivo_res = open('resultado.txt', 'a')
+					if palavras_fim[counter] != '-1-':
+						counter+=1
+						if counter >= len(palavra_index):
+							pass
+						else:
+							if counter >= len(palavra_fim_index):
+								pass
+							else:
+								string = (palavra[palavra_index[counter] + len(palavras[counter]): palavra_fim_index[counter]] + '	')
+								arquivo_res.write(string)
+					else:
+						if counter >= len(palavra_index):
+							pass
+						else:
+							if counter >= len(palavra_fim_index):
+								pass
+							else:
+								string = (palavra[palavra_index[counter] + len(palavras[counter]): -1] + '	')
+								arquivo_res.write(string)
+					arquivo_res.write('\n')
 			'''
 			except Exception as erro:
 				print('\n\nErro #00000002: ' + str(erro))
